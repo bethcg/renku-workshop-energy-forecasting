@@ -32,19 +32,19 @@ This project belongs to a Renku **hands-on workshop** at SDSC aiming to share ho
    ```
 Set the Job args to:
    ```bash
-   ["--horizon 7"]
-  ```
+    ["--horizon 7"]
+   ```
 3. Click **Submit**, keep the default resource class, and open the logs.
 4. Submit again with a different argument and a bigger resource class:
 Set the Job args to:
    ```bash
-   ["--horizon 28","--alpha 10"]
-  ```
+       ["--horizon 28","--alpha 10"]
+   ```
 5. Jobs don't keep files. Logs disappear when a job is dismissed, and finished jobs are removed after ~24 h. To keep results, point the argument `--out` at the mounted data connector.
 
 You can set your output directory in the job launcher with an [Environment Variable](https://docs.renkulab.io/en/latest/docs/users/compute/session/guides/share-session-launch-link/#make-launch-links-even-smarter-with-environment-variables). Add a new environment variable: `OUTPUT_DIR` with the value of the route to your data connector mount point.
 
-CLI alternative: `rnk launcher list --mode non-interactive` · `rnk job start --launcher <id>` · `rnk job logs <job-id>`.
+[CLI alternative](https://docs.renkulab.io/en/latest/docs/users/cli/cli-reference/): `rnk launcher list --mode non-interactive` · `rnk job start --launcher <id>` · `rnk job logs <job-id>`.
 
 ## Exercise 2: App
 
