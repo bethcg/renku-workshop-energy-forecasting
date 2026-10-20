@@ -1,4 +1,4 @@
-"""Generate the synthetic daily electricity-consumption sample used in the workshop.
+"""Generate the synthetic daily electricity-consumption sample.
 
 The numbers are SYNTHETIC (realistic seasonality, invented values) so the repo can be
 public and has no licensing or data-protection questions. Swap in real open data

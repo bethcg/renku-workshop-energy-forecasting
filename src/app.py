@@ -1,15 +1,15 @@
-"""Workshop APP: public Streamlit dashboard of (synthetic) Swiss-style electricity consumption."""
+"""APP: public Streamlit dashboard of (synthetic) Swiss-style electricity consumption."""
 import sys
 from pathlib import Path
 
 import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from model import fit_and_forecast, load  # noqa: E402
+from model import fit_and_forecast, load
 
 st.set_page_config(page_title="Energy consumption monitor", layout="wide")
 st.title("Energy consumption monitor")
-st.caption("Renku Jobs & Apps workshop · synthetic sample data, not real measurements")
+st.caption("Synthetic sample data, not real measurements")
 
 df = load()
 start, end = st.slider(

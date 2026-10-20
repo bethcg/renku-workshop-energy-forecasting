@@ -1,4 +1,4 @@
-"""Workshop JOB: fit a forecast and report its error. Runs in < 1 minute, no browser needed.
+"""JOB: fit a forecast and report its error. Runs in < 1 minute, no browser needed.
 
     python train.py --horizon 7
     python train.py --horizon 14 --alpha 10 --out /path/to/data-connector
@@ -10,7 +10,7 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
-from model import fit_and_forecast, load  # noqa: E402
+from model import fit_and_forecast, load 
 
 
 def writable_dir(preferred):
@@ -35,7 +35,7 @@ def main():
     print(f"[1/4] Loading data ...", flush=True)
     df = load()
     print(f"      {len(df)} days, {df.date.min().date()} to {df.date.max().date()}", flush=True)
-    time.sleep(2)  # make the job visible in the UI for a moment
+    time.sleep(2) 
 
     print(f"[2/4] Fitting Ridge(alpha={args.alpha}) and forecasting the last {args.horizon} days ...", flush=True)
     forecast, mae = fit_and_forecast(df, args.horizon, args.alpha)
@@ -49,7 +49,7 @@ def main():
     path = out / f"forecast_h{args.horizon}_a{args.alpha:g}.csv"
     forecast.to_csv(path, index=False)
     print(f"[4/4] Wrote {path}", flush=True)
-    print("      Note: job storage is temporary. Point --out at a data connector to keep results.", flush=True)
+    print("      Note: Ensure to point --out at a data connector to keep results persistent.", flush=True)
 
 
 if __name__ == "__main__":
