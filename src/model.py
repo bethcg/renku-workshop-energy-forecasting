@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from sklearn.linear_model import Ridge
 
-DATA = Path(__file__).resolve().parent.parent / "data" / "consumption.csv"
+DATA = Path(__file__).resolve().parent.parent.parent / "energy-consumption-input-data" / "consumption.csv"
 
 
 def load(path=DATA):
