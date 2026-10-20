@@ -1,10 +1,10 @@
-# Renku workshop - Energy consumption monitor
+# Energy consumption
 
 Forecast daily electricity consumption in a **Job**, and explore it in a public **Streamlit App**.
 
-Part of the **Renku Jobs & Apps hands-on workshop** (SDSC). Each participant submits a **Job** (non-interactive run) and publishes an **App** (public web app) from this repo.
+This project belongs to a Renku **hands-on workshop** at SDSC aiming to share how to create jobs and apps in Renku. Each participant submits a **Job** (non-interactive run) and publishes an **App** (public web app) from this repo.
 
-> **Data rule:** Currently Renku apps run only on **public** projects. 
+> **Data rule:** Renku apps run only on **public** projects. 
 
 ## What's inside
 
@@ -15,22 +15,34 @@ Part of the **Renku Jobs & Apps hands-on workshop** (SDSC). Each participant sub
 | `src/model.py` | Model shared by job and app |
 | `data/consumption.csv` | Synthetic daily sample (see Data) |
 | `Procfile` | One line that tells Renku how to start the app (`web:` binds `0.0.0.0` and `$RENKU_SESSION_PORT`) |
-| `Dockerfile` | Pre-built image for both launchers (*external image* route) |
-| `.github/workflows/image.yml` | Builds `ghcr.io/<owner>/<repo>:latest` on every push to `main` |
+
+## Preparation
+1. Fork the code repository `https://github.com/bethcg/renku-workshop-energy-forecasting`.
+2. Create a new project in Renku with the following requirements:
+- Data connector with a shared folder in your Polybox or Switchdrive account with **read/write** permissions. [Connect a shared folder to your project](https://docs.renkulab.io/en/latest/docs/users/data/guides/connect-data/connect-shared-switchdrive-or-polybox-folder-to-project/)
+- Code repository to your fork. [Add a code repository](https://docs.renkulab.io/en/latest/docs/users/code/guides/add-code-repository-to-project/)
+- Session launcher with Create from code on top of the requirements defined in the code repository. [Create an environment with custom packages](https://docs.renkulab.io/en/latest/docs/users/compute/environment/guides/create-environment-with-custom-packages-installed/)
 
 ## Exercise 1: Job
 
 1. In your Renku project, add a launcher of type **Job**.
-2. Choose **External image**: `ghcr.io/<owner>/<repo>:latest`. Set the command to:
+2. Choose **Create from code**. Select the code repository `renku-workshop-energy-forecasting` and set the command to:
    ```bash
-   python /app/train.py --horizon 7
+   ["python","renku-workshop-energy-forecasting/app/train.py"]
    ```
+Set the Job args to:
+   ```bash
+   ["--horizon 7"]
+  ```
 3. Click **Submit**, keep the default resource class, and open the logs.
 4. Submit again with a different argument and a bigger resource class:
+Set the Job args to:
    ```bash
-   python /app/train.py --horizon 28 --alpha 10
-   ```
-5. Jobs don't keep files. Logs disappear when a job is dismissed, and finished jobs are removed after ~24 h. To keep results, point `--out` at a mounted data connector.
+   ["--horizon 28","--alpha 10"]
+  ```
+5. Jobs don't keep files. Logs disappear when a job is dismissed, and finished jobs are removed after ~24 h. To keep results, point the argument `--out` at the mounted data connector.
+
+You can set your output directory in the job launcher with an [Environment Variable](https://docs.renkulab.io/en/latest/docs/users/compute/session/guides/share-session-launch-link/#make-launch-links-even-smarter-with-environment-variables). Add a new environment variable: `OUTPUT_DIR` with the value of the route to your data connector mount point.
 
 CLI alternative: `rnk launcher list --mode non-interactive` · `rnk job start --launcher <id>` · `rnk job logs <job-id>`.
 
@@ -38,12 +50,10 @@ CLI alternative: `rnk launcher list --mode non-interactive` · `rnk job start --
 
 A Streamlit dashboard with a period filter, KPIs, the daily series with a 7-day average, and a forecast check.
 
-1. Make sure the project is **public**.
+1. Make sure the Renku project is **public**.
 2. Add a launcher of type **App**:
-   - **External image** (workshop default): `ghcr.io/<owner>/<repo>:latest`, port `8000`, with no command (the image's CMD starts the server).
    - **Create from code** (stretch goal): point at this repo; Renku builds with buildpacks and runs the `Procfile`.
 3. Click **Start** and wait until the status is *Live*, then click **Copy app URL** and share it.
-   The URL looks like `https://renkulab.io/p/<namespace>/<project>/apps/<launcher-id>`.
 
 ## Run locally
 
@@ -70,8 +80,3 @@ RENKU_SESSION_PORT=8000 streamlit run src/app.py --server.port 8000
 
 - [Renku Jobs](https://docs.renkulab.io/en/latest/docs/users/compute/job/)
 - [Renku Apps](https://docs.renkulab.io/en/latest/docs/users/compute/app/) · [Publish an app](https://docs.renkulab.io/en/latest/docs/users/compute/app/guides/host-app)
-
-## Before the workshop (facilitator)
-
-- The GitHub Action pushes the image to GHCR. In the package settings, set the package visibility to **Public**, otherwise Renku can't pull it.
-- Do a dry run of both exercises with a test account.
