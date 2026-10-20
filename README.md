@@ -114,17 +114,6 @@ The app is a Streamlit dashboard with a period filter, KPIs, the daily series wi
 2. Add a launcher of type **App** → **Create from code** → this repository. Renku builds with buildpacks and starts the app with the `Procfile`; no command is needed.
 3. Click **Start** and wait until the status is *Live*, then click **Copy app URL** and share it. Share the Renku URL, not the address your browser lands on after the app opens.
 
-## Demo: SSH into a session with the CLI (facilitator)
-
-SSH lets you work in a RenkuLab session from your local terminal or IDE, such as VS Code Remote-SSH, while the code runs on RenkuLab resources.
-
-- **Requirement:** SSH is currently available only for sessions with a **code-based environment** (*Create from code*), like the session launcher from *Preparation*.
-- **Demo flow:**
-  1. Start the session from the CLI: `rnk session start --launcher <session-launcher-id> --wait`
-  2. Connect over SSH: `<SSH connect step, to be confirmed for the current release>`
-  3. Show the repo and the mounted storage in the terminal, run `python train.py --horizon 7`, then open the same session in VS Code.
-  4. Stop the session: `rnk session list`, then `rnk session stop <session-id>`.
-
 ## Run locally
 
 ```bash
