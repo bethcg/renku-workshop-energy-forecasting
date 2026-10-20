@@ -13,15 +13,15 @@ This project belongs to a Renku **hands-on workshop** at SDSC aiming to share ho
 | `train.py` | **Job**: holds out the last N days, fits a Ridge forecast, prints MAE, writes a CSV |
 | `src/app.py` | **App**: Streamlit dashboard |
 | `src/model.py` | Model shared by job and app |
-| `data/consumption.csv` | Synthetic daily sample (see Data) |
 | `Procfile` | One line that tells Renku how to start the app (`web:` binds `0.0.0.0` and `$RENKU_SESSION_PORT`) |
 
 ## Renku project setup
 
 1. Fork the code repository `https://github.com/bethcg/renku-workshop-energy-forecasting`.
 2. Create a new project in Renku, set it to **public**, and add:
+   - **Data connector with input data**: [link to your project the already existing data connector]() containing the input data, `renku-team/energy-consumption-forecast/energy-consumption-input-data`.
    - **Code repository**: your fork. [Add a code repository](https://docs.renkulab.io/en/latest/docs/users/code/guides/add-code-repository-to-project/)
-   - **Storage for job results**: either option from *Where to keep job results* below.
+   - **Storage for job results (Optional)**: either option from *Where to keep job results* below.
    - **Session launcher**: *Create from code*, using the requirements defined in the code repository. [Create an environment with custom packages](https://docs.renkulab.io/en/latest/docs/users/compute/environment/guides/create-environment-with-custom-packages-installed/)
 3. Start the session launcher once to check that the environment builds. The first build takes a few minutes.
 
