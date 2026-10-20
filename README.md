@@ -16,7 +16,7 @@ This project belongs to a Renku **hands-on workshop** at SDSC aiming to share ho
 | `data/consumption.csv` | Synthetic daily sample (see Data) |
 | `Procfile` | One line that tells Renku how to start the app (`web:` binds `0.0.0.0` and `$RENKU_SESSION_PORT`) |
 
-## Preparation (before the workshop)
+## Renku project setup
 
 1. Fork the code repository `https://github.com/bethcg/renku-workshop-energy-forecasting`.
 2. Create a new project in Renku, set it to **public**, and add:
