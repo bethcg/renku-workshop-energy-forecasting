@@ -18,12 +18,12 @@ This repo supports a Renku **hands-on workshop** and will walk you through submi
 ## Step 1: Set up your Renku project
 
 1. Fork this code repository `https://github.com/bethcg/renku-workshop-energy-forecasting`.
-2. Create a new project in Renku, set it to **public** (required later for the app!), and add the following to your Renku project:
+2. Create a new project in [Renku](https://renkulab.io), set it to **public** (required later for the app!), and add the following to your Renku project:
    - **Data connector with input data**: In the data section, click the plus button, paste the following data identifier, and click 'Link': `renku-team/energy-consumption-forecast/energy-input-data`.
    - **Code repository**: Connect your fork of this repo. In the code section, click the plus button and paste this repo's clone url: `https://github.com/bethcg/renku-workshop-energy-forecasting.git` 
-   - **Storage for job results (Optional)**: Choose either option from *Where to keep job results* below.
+   - **Storage for job results (Optional)**: Choose either option from *Where to keep job results* below. If you don't choose one of those options, the job will not simply save its results, which is not realistic but is ok for the purposes of this tutorial.
    - **Session launcher**: In the Launchers section, click the plus button, click 'Session Launcher' and choose *Create from code*. Choose the interface of your choice and finish creating the launcher. This will create a session environment using the requirements defined in the code repository. [Learn more](https://docs.renkulab.io/en/latest/docs/users/compute/environment/guides/create-environment-with-custom-packages-installed/)
-3. Once you create the launcher, the environment will start building. The first build takes a few minutes. You can do Step 2- set up the CLI- while it builds.
+3. Once you create the launcher, the environment will start building. The first build takes a few minutes. You can do Step 2- set up the CLI- while it builds. If you're brand new to Renku, you can launch the session once the image builds and take a look at the code and data interactively. 
 
 ### Where to keep job results
 
@@ -110,8 +110,9 @@ rnk job logs <job-id>                             # logs of a finished job
 The app is a Streamlit dashboard with a period filter, KPIs, the daily series with a 7-day average, and a forecast check.
 
 1. Make sure the Renku project is **public**. If not, go to Project Settings and change it. 
-2. Add a launcher of type **App** → **Create from code** → this repository. Renku builds with buildpacks and starts the app with the `Procfile`; no command is needed.
-3. Click **Start** and wait until the status is *Live*, then click **Copy app URL** and share it. Share the Renku URL, not the address your browser lands on after the app opens.
+2. Add a launcher of type **App** → **Create from code** → this repository. Renku builds an image based on the requirements in the code repository, and it knows how to start the app based on the `Procfile`.
+3. Click **Start** and wait until the status is *Live*. Then click **Open**.
+4. To share your app, click the drop down menu on the App Launcher's *Open* button and click **Copy share link**. This shares the app's 'lobby' URL, so that if the viewer opens a "sleeping" app they see a nice loading screen instead of a blank page. Try sharing your link with someone else, and test out how quickly the app loads!
 
 ## Run locally
 
