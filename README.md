@@ -34,7 +34,7 @@ Jobs have no persistent disk of their own, so results must go to storage that is
 | **Data connector to a PolyBox / SWITCHdrive shared folder** | [Connect a shared folder](https://docs.renkulab.io/en/latest/docs/users/data/guides/connect-data/connect-shared-switchdrive-or-polybox-folder-to-project/) with **read/write** permissions | Needs your credentials when the job starts | Results also show up in your PolyBox / SWITCHdrive |
 | **Renku project storage** | Limited rollout: email [hello@renku.io](mailto:hello@renku.io) with your project name, then create it from the new tab in the data connector menu | Owners and editors read/write; viewers read-only; **anonymous users have no access, even on public projects** | Mounted in every session and job of the project; shared with project members; persists across pauses and shutdowns |
 
-The **App can't read either option**. Apps only mount public, credential-free data connectors, and anonymous app visitors have no access to project storage. That is why the app ships with its own `data/consumption.csv`.
+The **App can't read either option**. Apps only mount public, credential-free data connectors, and anonymous app visitors have no access to project storage.
 
 ## Set up the `rnk` CLI
 
