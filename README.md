@@ -1,12 +1,12 @@
 # Energy consumption
 
-Forecast daily electricity consumption in a **Job**, and explore it in a public **Streamlit App**.
+Forecast daily electricity consumption in a **Renku Job**, and explore it in a public **Streamlit App**.
 
-This project belongs to a Renku **hands-on workshop** at SDSC aiming to share how to create jobs and apps in Renku. Each participant submits a **Job** (non-interactive run) and publishes an **App** (public web app) from this repo.
+This repo supports a Renku **hands-on workshop** and will walk you through submitting a **Renku Job** (non-interactive run) and publishing a **Renku App** (public web app) from this repo.
 
-> **Data rule:** Renku apps run only on **public** projects. 
+> **Data rule:** Renku apps run only on **public** projects, so make sure to create a public Renku project. 
 
-## What's inside
+## What's inside this Repo
 
 | Path | Role |
 | --- | --- |
@@ -15,15 +15,15 @@ This project belongs to a Renku **hands-on workshop** at SDSC aiming to share ho
 | `src/model.py` | Model shared by job and app |
 | `Procfile` | One line that tells Renku how to start the app (`web:` binds `0.0.0.0` and `$RENKU_SESSION_PORT`) |
 
-## Renku project setup
+## Step 1: Set up your Renku project
 
-1. Fork the code repository `https://github.com/bethcg/renku-workshop-energy-forecasting`.
-2. Create a new project in Renku, set it to **public**, and add:
-   - **Data connector with input data**: [link to your project the already existing data connector](https://docs.renkulab.io/en/latest/docs/users/data/guides/link-data-connector-to-project/) containing the input data, `renku-team/energy-consumption-forecast/energy-consumption-input-data`.
-   - **Code repository**: your fork. [Add a code repository](https://docs.renkulab.io/en/latest/docs/users/code/guides/add-code-repository-to-project/)
-   - **Storage for job results (Optional)**: either option from *Where to keep job results* below.
-   - **Session launcher**: *Create from code*, using the requirements defined in the code repository. [Create an environment with custom packages](https://docs.renkulab.io/en/latest/docs/users/compute/environment/guides/create-environment-with-custom-packages-installed/)
-3. Start the session launcher once to check that the environment builds. The first build takes a few minutes.
+1. Fork this code repository `https://github.com/bethcg/renku-workshop-energy-forecasting`.
+2. Create a new project in Renku, set it to **public** (required later for the app!), and add the following to your Renku project:
+   - **Data connector with input data**: In the data section, click the plus button, paste the following data identifier, and click 'Link': `renku-team/energy-consumption-forecast/energy-consumption-input-data`.
+   - **Code repository**: Connect your fork of this repo. In the code section, click the plus button and paste this repo's clone url: `https://github.com/bethcg/renku-workshop-energy-forecasting.git` 
+   - **Storage for job results (Optional)**: Choose either option from *Where to keep job results* below.
+   - **Session launcher**: In the Launchers section, click the plus button, click 'Session Launcher' and choose *Create from code*. Choose the interface of your choice and finish creating the launcher. This will create a session environment using the requirements defined in the code repository. [Learn more](https://docs.renkulab.io/en/latest/docs/users/compute/environment/guides/create-environment-with-custom-packages-installed/)
+3. Once you create the launcher, the environment will start building. The first build takes a few minutes. You can do Step 2- set up the CLI- while it builds.
 
 ### Where to keep job results
 
@@ -32,11 +32,11 @@ Jobs have no persistent disk of their own, so results must go to storage that is
 | Option | How to get it | Access | Notes |
 | --- | --- | --- | --- |
 | **Data connector to a PolyBox / SWITCHdrive shared folder** | [Connect a shared folder](https://docs.renkulab.io/en/latest/docs/users/data/guides/connect-data/connect-shared-switchdrive-or-polybox-folder-to-project/) with **read/write** permissions | Needs your credentials when the job starts | Results also show up in your PolyBox / SWITCHdrive |
-| **Renku project storage** | Limited rollout: email [hello@renku.io](mailto:hello@renku.io) with your project name, then create it from the new tab in the data connector menu | Owners and editors read/write; viewers read-only; **anonymous users have no access, even on public projects** | Mounted in every session and job of the project; shared with project members; persists across pauses and shutdowns |
+| **Renku project storage** | In beta: talk to a workshop host to get beta access to project storage, then create it from the new tab in the data connector menu | Owners and editors read/write; viewers read-only; **anonymous users have no access, even on public projects** | Mounted in every session and job of the project; shared with project members; persists across pauses and shutdowns |
 
-The **App can't read either option**. Apps only mount public, credential-free data connectors, and anonymous app visitors have no access to project storage.
+The **App can read the public input data, but not the private output data**. Apps only mount public, credential-free data connectors, and anonymous app visitors have no access to project storage.
 
-## Set up the `rnk` CLI
+## Step 2: Set up the `rnk` CLI
 
 The `rnk` CLI lets you start and follow jobs (and sessions) from your terminal. Install it on your laptop, not inside a session.
 
@@ -46,7 +46,7 @@ The `rnk` CLI lets you start and follow jobs (and sessions) from your terminal. 
      curl -sfSL https://raw.githubusercontent.com/SwissDataScienceCenter/renku-cli/main/install.sh | bash
      ```
    - Windows, or as a manual alternative: download the binary from the [releases page](https://github.com/SwissDataScienceCenter/renku-cli/releases/latest) (`*-darwin` for macOS, `*-amd64` / `*-aarch64` for Linux, `*-windows` for Windows), make it executable, and put it on your `PATH`.
-2. **Enable shell completions** (recommended, so you can tab-complete launcher and job IDs):
+2. **Enable shell completions** (highly recommended, so you can tab-complete launcher and job IDs):
    ```bash
    echo "source <(COMPLETE=zsh rnk)" >> ~/.zshrc     # zsh (macOS default)
    echo "source <(COMPLETE=bash rnk)" >> ~/.bashrc   # bash
@@ -58,19 +58,18 @@ The `rnk` CLI lets you start and follow jobs (and sessions) from your terminal. 
    ```
 4. **Select your workshop project**, so you don't need to pass it to every command:
    ```bash
-   rnk project list                               # find your project
-   rnk project activate <namespace>/<project-slug>
-   rnk project current                            # check
+   rnk project list                                # find your project
+   rnk project activate <namespace>/<project-slug> # start typing your project name and tab complete!
+   rnk project current                             # check
    ```
 5. **Check that it works**:
    ```bash
-   rnk version
    rnk launcher list
    ```
 
 Full reference: [Renku CLI](https://docs.renkulab.io/en/latest/docs/users/cli/cli-reference/).
 
-## Exercise 1: Job
+## Step 3: Run a Job
 
 ### In the Renku UI
 
@@ -106,11 +105,11 @@ rnk job logs <job-id>                             # logs of a finished job
 - Everything after `--` replaces the launcher's job args for this run only.
 - `--command` overrides the launcher's command, and `--submission-id <name>` gives the run a readable name.
 
-## Exercise 2: App
+## Step 4: Create an App
 
 The app is a Streamlit dashboard with a period filter, KPIs, the daily series with a 7-day average, and a forecast check.
 
-1. Make sure the Renku project is **public**.
+1. Make sure the Renku project is **public**. If not, go to Project Settings and change it. 
 2. Add a launcher of type **App** → **Create from code** → this repository. Renku builds with buildpacks and starts the app with the `Procfile`; no command is needed.
 3. Click **Start** and wait until the status is *Live*, then click **Copy app URL** and share it. Share the Renku URL, not the address your browser lands on after the app opens.
 
