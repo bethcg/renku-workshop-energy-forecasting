@@ -19,7 +19,7 @@ This repo supports a Renku **hands-on workshop** and will walk you through submi
 
 1. Fork this code repository `https://github.com/bethcg/renku-workshop-energy-forecasting`.
 2. Create a new project in [Renku](https://renkulab.io), set it to **public** (required later for the app!), and add the following to your Renku project:
-   - **Data connector with input data**: In the data section, click the plus button, paste the following data identifier, and click 'Link': `renku-team/energy-consumption-forecast/energy-consumption-input-data`.
+   - **Data connector with input data**: In the data section, click the plus button, paste the following data identifier, and click 'Link': `renku-team/energy-consumption-forecast/energy-input-data`.
    - **Code repository**: Connect your fork of this repo. In the code section, click the plus button and paste this repo's clone url: `https://github.com/bethcg/renku-workshop-energy-forecasting.git` 
    - **Storage for job results (Optional)**: Choose either option from *Where to keep job results* below. If you don't choose one of those options, the job will not simply save its results, which is not realistic but is ok for the purposes of this tutorial.
    - **Session launcher**: In the Launchers section, click the plus button, click 'Session Launcher' and choose *Create from code*. Choose the interface of your choice and finish creating the launcher. This will create a session environment using the requirements defined in the code repository. [Learn more](https://docs.renkulab.io/en/latest/docs/users/compute/environment/guides/create-environment-with-custom-packages-installed/)
