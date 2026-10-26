@@ -1,6 +1,12 @@
 """APP: public Streamlit dashboard of (synthetic) Swiss-style electricity consumption."""
 import sys
 from pathlib import Path
+import os
+
+def list_files_walk(start_path='.'):
+    for root, dirs, files in os.walk(start_path):
+        for file in files:
+            print(os.path.join(root, file))
 
 import streamlit as st
 
@@ -11,7 +17,13 @@ st.set_page_config(page_title="Energy consumption monitor", layout="wide")
 st.title("Energy consumption monitor")
 st.caption("Synthetic sample data, not real measurements")
 
-df = load()
+try:
+    df = load()
+except:
+    directory_path = '../../'
+    list_files_walk(directory_path)
+
+
 start, end = st.slider(
     "Period", min_value=df.date.min().date(), max_value=df.date.max().date(),
     value=(df.date.max().date().replace(month=1, day=1), df.date.max().date()),
