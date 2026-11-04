@@ -19,14 +19,7 @@ st.set_page_config(page_title="Energy consumption monitor", layout="wide")
 st.title("Energy consumption monitor")
 st.caption("Synthetic sample data, not real measurements")
 
-try:
-    df = load(DATA)
-except:
-    directory_path = '../../'
-    directory_path = os.environ.get("RENKU_MOUNT_DIR")
-    
-    list_files_walk(directory_path)
-
+df = load(DATA)
 
 start, end = st.slider(
     "Period", min_value=df.date.min().date(), max_value=df.date.max().date(),
