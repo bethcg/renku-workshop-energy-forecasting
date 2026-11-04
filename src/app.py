@@ -21,6 +21,8 @@ try:
     df = load()
 except:
     directory_path = '../../'
+    directory_path = os.environ.get("RENKU_MOUNT_DIR")
+    
     list_files_walk(directory_path)
 
 
