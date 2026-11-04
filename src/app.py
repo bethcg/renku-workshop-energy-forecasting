@@ -5,7 +5,7 @@ import os
 import streamlit as st
 from model import fit_and_forecast, load
 
-RENKU_MOUNT_DIRECTORY = os.environ.get("RENKU_BASE_URL_PATH")
+RENKU_MOUNT_DIRECTORY = os.environ.get("RENKU_MOUNT_DIR")
 
 DATA=os.path.join(RENKU_MOUNT_DIRECTORY, "energy-input-data", "consumption.csv")
 
