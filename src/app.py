@@ -2,23 +2,25 @@
 import sys
 from pathlib import Path
 import os
+import streamlit as st
+from model import fit_and_forecast, load
+
+RENKU_MOUNT_DIRECTORY = os.environ.get("RENKU_MOUNT_DIR")
+
+DATA=os.path.join(RENKU_MOUNT_DIRECTORY, "energy-input-data", "consumption.csv")
 
 def list_files_walk(start_path='.'):
     for root, dirs, files in os.walk(start_path):
         for file in files:
             print(os.path.join(root, file))
 
-import streamlit as st
-
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from model import fit_and_forecast, load
 
 st.set_page_config(page_title="Energy consumption monitor", layout="wide")
 st.title("Energy consumption monitor")
 st.caption("Synthetic sample data, not real measurements")
 
 try:
-    df = load()
+    df = load(DATA)
 except:
     directory_path = '../../'
     directory_path = os.environ.get("RENKU_MOUNT_DIR")
