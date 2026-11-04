@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn.linear_model import Ridge
 import os
 
-RENKU_MOUNT_DIRECTORY = os.environ.get("RENKU_MOUNT_DIRECTORY")
+RENKU_MOUNT_DIRECTORY = os.environ.get("RENKU_MOUNT_DIR")
 
 DATA = RENKU_MOUNT_DIRECTORY/ "energy-input-data" / "consumption.csv"
 
