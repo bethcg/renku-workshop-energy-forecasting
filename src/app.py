@@ -7,7 +7,7 @@ from model import fit_and_forecast, load
 
 RENKU_MOUNT_DIRECTORY = os.environ.get("RENKU_BASE_URL_PATH")
 
-DATA=os.path.join(RENKU_MOUNT_DIRECTORY,"renku","work", "energy-input-data", "consumption.csv")
+DATA=os.path.join(RENKU_MOUNT_DIRECTORY,"home","renku","work", "energy-input-data", "consumption.csv")
 
 def list_files_walk(start_path='.'):
     for root, dirs, files in os.walk(start_path):
