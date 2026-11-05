@@ -8,7 +8,7 @@ import os
 
 RENKU_MOUNT_DIRECTORY = os.environ.get("RENKU_BASE_URL_PATH")
 
-DATA=os.path.join(RENKU_MOUNT_DIRECTORY,"renku","work", "energy-input-data", "consumption.csv")
+DATA=os.path.join(RENKU_MOUNT_DIRECTORY,"home","renku","work", "energy-input-data", "consumption.csv")
 
 def load(path=DATA):
     df = pd.read_csv(path, parse_dates=["date"])
