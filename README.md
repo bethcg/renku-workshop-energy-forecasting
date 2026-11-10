@@ -2,7 +2,7 @@
 
 Forecast daily electricity consumption in a **Renku Job**, and explore it in a public **Streamlit App**.
 
-This repo supports a Renku **hands-on workshop** and will walk you through submitting a **Renku Job** (non-interactive run) and publishing a **Renku App** (public web app) from this repo.
+This repo supports a Renku **hands-on workshop** and will walk you through **interactive sessions**, submitting a **Renku Job** (non-interactive run) and publishing a **Renku App** (public web app) from this repo.
 
 > **Data rule:** Renku apps run only on **public** projects, so make sure to create a public Renku project. 
 
